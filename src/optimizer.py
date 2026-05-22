@@ -43,8 +43,8 @@ def optimize_gpt(python_code, module_name, platform, model=OPENAI_MODEL):
     schema = _extension_codes.model_json_schema()
     _logger.info('SENDING OPTIMIZATION REQUEST TO OPENAI... '
                  f'(MODEL: {model}, PLATFORM: {platform})')
-    response = openai.chat.completions.parse(
-        model=model, messages=messages_for(python_code, module_name, schema, platform),
-        response_format=_extension_codes).choices[0].message.parsed
+    response = openai.responses.parse(
+        model=model, text_format=_extension_codes,
+        input=messages_for(python_code, module_name, schema, platform)).output_parsed
     _logger.info('RECEIVED OPTIMIZATION RESPONSE FROM OPENAI')
     return response.c_code, response.setup, response.usage
