@@ -7,7 +7,7 @@ license: mit
 emoji: 🐉
 colorFrom: blue
 colorTo: green
-short_description: High-performance Python C Extension code generator from Python code.
+short_description: High-performance Python C Extension generator from Python.
 pinned: true
 thumbnail: >-
   https://cdn-uploads.huggingface.co/production/uploads/67caf50af30e4fe450042ac4/GBtJw_6f8kKFbPaAi6dXk.png
