@@ -56,29 +56,39 @@ its performance against the original Python code.
 
 The app reads configuration from environment variables and from a `.env` file if present.
 
-* `MODELS`: Colon-separated list of models to expose in the dropdown.\
-  Example:
+* `MODELS`: Colon-separated list of models to expose in the dropdown.
 
-  ```bash
-  export MODELS="gpt-5.1-codex-mini:gpt-5.4-mini"
-  ```
+  * Examples:
 
-  ```powershell
-  $env:MODELS = "gpt-5.1-codex-mini:gpt-5.4-mini"
-  ```
+    *bash:*
+
+    ```bash
+    export MODELS="gpt-5.1-codex-mini:gpt-5.4-mini"
+    ```
+
+    *powershell:*
+
+    ```powershell
+    $env:MODELS = "gpt-5.1-codex-mini:gpt-5.4-mini"
+    ```
 
   If not set, the app defaults to `gpt-5.1-codex-mini` and `gpt-5.4-mini`.
 
-* `COMPILE_STAGE`: Set to `true`, `1`, or `yes` to enable the compile and test stage.\
-  Example:
+* `COMPILE_STAGE`: Set to `true`, `1`, or `yes` to enable the compile and test stage.
 
-  ```bash
-  export COMPILE_STAGE=true
-  ```
+  * Examples:
 
-  ```powershell
-  $env:COMPILE_STAGE = "true"
-  ```
+    *bash:*
+
+    ```bash
+    export COMPILE_STAGE=true
+    ```
+
+    *powershell:*
+
+    ```powershell
+    $env:COMPILE_STAGE = "true"
+    ```
 
 ### Running locally
 
@@ -107,6 +117,7 @@ Sections:
 
 * **Dropdown selectors and input fields**:
   * **Module name input**:
+
     A text input field where users can specify the name of the C extension module to be
     generated.
 
@@ -126,18 +137,21 @@ Sections:
     ```
 
   * **Model selector**:
+
     A dropdown menu to select the model used for code generation.
 
     The available options are taken from the `MODELS` environment variable if set.
     Otherwise the app defaults to `gpt-5.1-codex-mini` and `gpt-5.4-mini`.
 
   * **Platform selector**:
+
     A dropdown menu to select the target platform for the generated C extension.
 
     This affects how the app frames the prompt for the model and ensures the
     generated code targets the selected platform (`Windows` or `Linux`).
 
   * **Examples selector**:
+
     A list of ready-made Python examples to load into the input field.
 
     Built-in examples include `Hello world`, `Sum array`, `Fibonacci`, `Leibniz pi`,
@@ -157,38 +171,48 @@ Sections:
     > optimized must contain only declarations such as DEF or CLASS.
 
   * **C extension code**:
+
     A text area that displays the generated C extension code.
+
   * **Compilation code**:
+
     A text area that shows the generated `setup.py` code.
     This file is required to compile the C extension.
+
   * **Test compare code**:
+
     A text area that provides example code to run the compiled C extension.
 
 * **Output areas**:
 
   These are non-editable areas that display the results of various operations.
 
-  * **C Extension result**:
+  * **C Extension result**: *(Only with Compile Stage Enabled)*
+
     A text area that displays the output of the C extension code build.
 
-    Beware that this area can contain a large amount of text including warnings during
-    the compilation process and sensible information about the local environment,
-    like: paths, Python version, etc may be included.
+    > [!CAUTION]
+    > Beware that this area can contain a large amount of text including warnings during
+    > the compilation process and sensible information about the local environment,
+    > like: paths, Python version, etc may be included.
+    >
+    > Redact that information if you plan to share the output.
 
-    Redact that information if you plan to share the output.
+  * **Test result**: *(Only with Compile Stage Enabled)*
 
-  * **Test result**:
     A text area that displays the output of the test code run.
 
 * **Buttons**:
   * **Generate extension code**:
+
     A button that triggers the generation of the C extension code from the provided
     Python code.
 
     It will call the model to generate the C code, the setup.py file and the test code,
     filling the corresponding text areas automatically.
 
-  * **Compile extension**:
+  * **Compile extension**: *(Only with Compile Stage Enabled)*
+
     A button that compiles the generated C extension using the provided `setup.py` file.
     It will create the extension C file, `<module_name>.c`, and the `setup.py` file in
     the local folder, then it will run the compilation command and build the C extension,
@@ -207,7 +231,8 @@ Sections:
 
     It will display the compilation output in the "C Extension result" area.
 
-  * **Test code**:
+  * **Test code**: *(Only with Compile Stage Enabled)*
+
     A button that executes the test code to compare the performance of the original
     Python code and the generated C extension.
 
@@ -218,3 +243,7 @@ Sections:
 
     Will save the test code provided in the "Test compare code" into the
     `usage_example.py` file and execute it, showing the output in the "Test result" area.
+
+## TO DO
+
+* Add an Anthropic Claude based `optimizer`
