@@ -37,6 +37,7 @@ def leibniz_pi(iterations):
 """
 
 # Finds the total maximum subarray sum over 20 runs using LCG RNG.
+# * <https://en.wikipedia.org/wiki/Maximum_subarray_problem>
 example_subarray = """
 def lcg(seed, a=1664525, c=1013904223, m=2**32):
     value = seed
