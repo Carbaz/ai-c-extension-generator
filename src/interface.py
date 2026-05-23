@@ -26,10 +26,10 @@ def get_interface(optimize_function, compile_stage=False,
                   models=["gpt-5.1-codex-mini"]):
     """Get the Gradio Blocks interface for the AI Python C Extensions Generator."""
     with Blocks(css=css, title="AI Python C Extensions Generator") as ui:
-        Markdown("## Convert code from Python to C++")
+        Markdown("## Convert code from Python to C Extension")
 
         with Row():
-            module_name = Textbox(label="Module name:", lines=1, value="zz_my_module")
+            module_name = Textbox(label="Module name:", lines=1, value="sample_module")
             model = Dropdown(label="Select model", choices=models, value=models[0])
             platform = Dropdown(label="Select platform", choices=["Windows", "Linux"],
                                 value=default_platform)
