@@ -1,7 +1,8 @@
 """Main entrypoint module for the AI Python C Extensions Generator application."""
 
 from logging import getLogger
-from os import getenv
+from os import getenv, sep
+from pathlib import Path
 from sys import platform
 
 from .compiler import compile_extension
@@ -26,7 +27,12 @@ else:
     default_platform = "Linux"
 
 # Read compile stage flag from environment variable, defaulting to False if not set.
-compile_stage = getenv("COMPILE_STAGE", "False").lower() in ("true", "1", "yes")
+if compile_stage := getenv("COMPILE_STAGE", "False").lower() in ("true", "1", "yes"):
+    # Define the build directory for compiled extensions.
+    BUILD_DIR = Path("compiled")
+    # BUILD_DIR.mkdir(parents=True, exist_ok=True)
+    _logger.info('COMPILE STAGE ENABLED')
+    _logger.info(f'COMPILE DIRECTORY SET TO: .{sep}{BUILD_DIR}')
 
 
 # CSS styles for the interface, defining background colors for C and Python code areas.
@@ -42,9 +48,9 @@ def main():
     _logger.info(f'AVAILABLE MODELS: {models}')
     # Prepare the interface configuration based.
     interface_config = {"models": models, "compile_stage": compile_stage,
-                        "optimize_function": optimize_function}
+                        "optimize_function": optimize_function,
+                        "compile_path": BUILD_DIR}
     if compile_stage:
-        _logger.info('COMPILE STAGE ENABLED')
         interface_config.update({"compile_extension": compile_extension,
                                  "test_extension": test_extension})
     app = get_interface(**interface_config)

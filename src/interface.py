@@ -1,6 +1,7 @@
 """Interface module for the AI Python C Extensions Generator application."""
 
-from gradio import Blocks, Button, Dropdown, Examples, Markdown, Row, TextArea, Textbox
+from gradio import Blocks, Button, Dropdown, Examples, Markdown, Row, State, TextArea
+from gradio import Textbox
 
 from .examples import example_dict
 
@@ -17,9 +18,11 @@ def get_interface(optimize_function, compile_stage=False,
                   compile_extension=_compile_extension,
                   test_extension=_test_extension,
                   default_platform="Windows",
+                  compile_path="compile",
                   models=["gpt-5.1-codex-mini"]):
     """Get the Gradio Blocks interface for the AI Python C Extensions Generator."""
     with Blocks(title="AI Python C Extensions Generator") as ui:
+        compile_path_st = State(value=compile_path)
         Markdown("## Convert code from Python to C Extension")
 
         with Row():
@@ -51,7 +54,8 @@ def get_interface(optimize_function, compile_stage=False,
                                  buttons=["copy"], elem_classes=["python"])
 
         get_extension.click(optimize_function,
-                            inputs=[python, module_name, platform, model],
+                            inputs=[python, module_name, platform,
+                                    compile_path_st, model],
                             outputs=[c_code, setup_code, usage_code])
 
         # ######### BUILD AND TEST SECTIONS ######### #
@@ -69,11 +73,11 @@ def get_interface(optimize_function, compile_stage=False,
                                     elem_classes=["python"])
 
             compile_ext.click(compile_extension,
-                              inputs=[c_code, setup_code, module_name],
+                              inputs=[c_code, setup_code, module_name, compile_path_st],
                               outputs=[c_ext_out])
 
             test_run.click(test_extension,
-                           inputs=[usage_code],
+                           inputs=[usage_code, compile_path_st],
                            outputs=[test_out])
 
     return ui
