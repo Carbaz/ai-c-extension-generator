@@ -5,6 +5,12 @@ from gradio import Textbox
 
 from .examples import example_dict
 
+# CSS styles for the interface, defining background colors for C and Python code areas.
+css = """
+.c_ext {background-color: #050;}
+.python {background-color: #306998;}
+"""
+
 
 def _compile_extension():
     return "COMPILE_EXTENSION PLACEHOLDER"
@@ -21,7 +27,7 @@ def get_interface(optimize_function, compile_stage=False,
                   compile_path="compiled",
                   models=["gpt-5.1-codex-mini"]):
     """Get the Gradio Blocks interface for the AI Python C Extensions Generator."""
-    with Blocks(title="AI Python C Extensions Generator") as ui:
+    with Blocks(title="AI Python C Extensions Generator", css=css) as ui:
         compile_path_st = State(value=compile_path)
         Markdown("## Convert code from Python to C Extension")
 
