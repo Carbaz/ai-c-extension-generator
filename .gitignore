@@ -208,3 +208,9 @@ __marimo__/
 
 # Generated Scripts
 **activate-*-env.*
+
+# Extension generation and testing files
+*.c
+*.pyd
+setup.py
+usage_example.py
