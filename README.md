@@ -109,7 +109,7 @@ The app reads configuration from environment variables and from a `.env` file if
 In this image, you can see the Gradio app dashboard whose main sections are
 described below.
 
-![Gradio app dashboard](gradio_dashboard.jpg)\
+![Gradio app dashboard](images/gradio_dashboard.jpg)\
 *Image: Gradio app dashboard with default example `hello world` code loaded.*
 *(compile output redacted for privacy)*
 
@@ -243,6 +243,14 @@ Sections:
 
     Will save the test code provided in the "Test compare code" into the
     `usage_example.py` file and execute it, showing the output in the "Test result" area.
+
+## Notebook
+
+The `notebooks` folder contains an example notebook demonstrating the usage and workflow
+of the Python C Extension Generator app.
+
+It provides a step-by-step, interactive overview for users who prefer a notebook-based
+approach.
 
 ## TO DO
 
