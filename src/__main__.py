@@ -29,6 +29,13 @@ else:
 compile_stage = getenv("COMPILE_STAGE", "False").lower() in ("true", "1", "yes")
 
 
+# CSS styles for the interface, defining background colors for C and Python code areas.
+css = """
+.c_ext {background-color: #050;}
+.python {background-color: #306998;}
+"""
+
+
 def main():
     """Launch the AI Python C Extensions Generator application."""
     _logger.info('STARTING AI PYTHON C EXTENSIONS GENERATOR...')
@@ -41,7 +48,7 @@ def main():
         interface_config.update({"compile_extension": compile_extension,
                                  "test_extension": test_extension})
     app = get_interface(**interface_config)
-    app.launch(footer_links=[])
+    app.launch(footer_links=[], css=css)
     # We return the app instance for potential use in autoreload scenarios.
     return app
 
