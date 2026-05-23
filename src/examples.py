@@ -46,7 +46,8 @@ def lcg(seed, a=1664525, c=1013904223, m=2**32):
 
 def max_subarray_sum(n, seed, min_val, max_val):
     lcg_gen = lcg(seed)
-    random_numbers = [next(lcg_gen) % (max_val - min_val + 1) + min_val for _ in range(n)]
+    random_numbers = [next(lcg_gen) % (max_val - min_val + 1) + min_val
+                      for _ in range(n)]
     max_sum = float('-inf')
     for i in range(n):
         current_sum = 0
