@@ -25,8 +25,11 @@ if platform == "win32":
 else:
     default_platform = "Linux"
 
+# Read compile stage flag from environment variable, defaulting to False if not set.
+compile_stage = getenv("COMPILE_STAGE", "False").lower() in ("true", "1", "yes")
 
-def main(compile_stage=False):
+
+def main():
     """Launch the AI Python C Extensions Generator application."""
     _logger.info('STARTING AI PYTHON C EXTENSIONS GENERATOR...')
     _logger.info(f'AVAILABLE MODELS: {models}')
@@ -35,8 +38,8 @@ def main(compile_stage=False):
                         "optimize_function": optimize_function}
     if compile_stage:
         _logger.info('COMPILE STAGE ENABLED')
-        interface_config.update({
-            "compile_extension": compile_extension, "test_extension": test_extension})
+        interface_config.update({"compile_extension": compile_extension,
+                                 "test_extension": test_extension})
     app = get_interface(**interface_config)
     app.launch(footer_links=[])
     # We return the app instance for potential use in autoreload scenarios.
@@ -44,4 +47,4 @@ def main(compile_stage=False):
 
 
 if __name__ == '__main__':
-    main(compile_stage=True)
+    main()
