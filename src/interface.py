@@ -18,7 +18,7 @@ def get_interface(optimize_function, compile_stage=False,
                   compile_extension=_compile_extension,
                   test_extension=_test_extension,
                   default_platform="Windows",
-                  compile_path="compile",
+                  compile_path="compiled",
                   models=["gpt-5.1-codex-mini"]):
     """Get the Gradio Blocks interface for the AI Python C Extensions Generator."""
     with Blocks(title="AI Python C Extensions Generator") as ui:

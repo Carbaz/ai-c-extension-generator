@@ -48,11 +48,11 @@ def main():
     _logger.info(f'AVAILABLE MODELS: {models}')
     # Prepare the interface configuration based.
     interface_config = {"models": models, "compile_stage": compile_stage,
-                        "optimize_function": optimize_function,
-                        "compile_path": BUILD_DIR}
+                        "optimize_function": optimize_function}
     if compile_stage:
         interface_config.update({"compile_extension": compile_extension,
-                                 "test_extension": test_extension})
+                                 "test_extension": test_extension,
+                                 "compile_path": BUILD_DIR})
     app = get_interface(**interface_config)
     app.launch(footer_links=[], css=css)
     # We return the app instance for potential use in autoreload scenarios.
