@@ -66,6 +66,15 @@ Here is the Python code to reimplement:
 {python_code}
 """
 
+# Define a footer disclaimer to be included in the interface.
+footer_disclaimer = """
+<div style='text-align: center; font-size: small;'>
+    This chatbot is powered by generative AI technology.<br>
+    While it strives to provide accurate information, it may occasionally make mistakes.
+    Additionally, conversations and source codes may be used to improve AI models.
+</div>
+"""
+
 
 # Define function to create the messages for the LLM.
 def messages_for(python_code, module_name, schema, platform, compile_path):

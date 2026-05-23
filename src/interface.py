@@ -4,6 +4,7 @@ from gradio import Blocks, Button, Dropdown, Examples, Markdown, Row, State, Tex
 from gradio import Textbox
 
 from .examples import example_dict
+from .prompts import footer_disclaimer
 
 
 def _compile_extension():
@@ -79,5 +80,9 @@ def get_interface(optimize_function, compile_stage=False,
             test_run.click(test_extension,
                            inputs=[usage_code, compile_path_st],
                            outputs=[test_out])
+
+    # Footer with disclaimer.
+    with ui:
+        Markdown(footer_disclaimer, elem_id="footer-disclaimer")
 
     return ui
